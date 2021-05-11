@@ -1,0 +1,4 @@
+asyncio==3.4.3
+daphne==3.0.2
+Django==3.2.2
+djangorestframework==3.12.4
