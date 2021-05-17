@@ -128,3 +128,5 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+OPEN_WEATHER_MAP_API_KEY = env('OPEN_WEATHER_MAP_API_KEY')
