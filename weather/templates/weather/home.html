@@ -1,0 +1,220 @@
+{% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bulma@0.9.2/css/bulma.min.css">
+    <title>{% trans "Weather" %}</title>
+    <style>
+        #app {
+            background: rgb(2, 0, 36);
+            background: linear-gradient(0deg, rgba(2, 0, 36, 1) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 212, 255, 1) 100%);
+        }
+    </style>
+</head>
+
+<body id="app" class="hero is-primary is-fullheight">
+<nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <a class="navbar-item" href="https://bulma.io">
+            <img src="https://cdn4.iconfinder.com/data/icons/essential-part-3/32/239-Weather-512.png"
+                 width="30" height="30" alt="logo">
+        </a>
+        <a role="button" class="navbar-burger" aria-label="menu"
+           aria-expanded="false" data-target="navbarBasicExample">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+    </div>
+    <div id="navbarBasicExample" class="navbar-menu">
+        <div class="navbar-start">
+            <h3 class="navbar-item">{% trans "Weather App" %}</h3>
+        </div>
+        <div class="navbar-end">
+            <div class="navbar-item">
+                <div class="select">
+                    <select onchange="if (this.value) window.location.href=this.value">
+                        <option>Select Language</option>
+                        <option value="/">{% trans "English" %}</option>
+                        <option value="/de">{% trans "Deutsch" %}</option>
+                        <option value="/es">{% trans "Spanish" %}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+<section class="section">
+    <div class="container">
+        <h1 id="cityName" class="title"></h1>
+        <h3 id="today"></h3>
+        <br/>
+        <p id="description"></p><br>
+        <div class="columns">
+            <div class="column is-2">
+                <h1 class="title">{% trans "Temp" %}: <span id="temp"></span></h1>
+            </div>
+            <div class="column">
+                <p>{% trans "Min" %}: <span id="tempMax"></span></p>
+                <p>{% trans "Max" %}:<spnan id="tempMin"></spnan></p>
+            </div>
+        </div>
+        <div class="columns">
+            <div class="column is-2">
+                <p>{% trans "Humidity" %}: <span id="humidity"></span></p>
+            </div>
+            <div class="column">
+                <p>{% trans "Pressure" %}: <span id="pressure"></span></p>
+            </div>
+        </div>
+        <div class="columns">
+            <div class="column is-2">
+                <p>{% trans "Wind Speed" %}: <span id="windSpeed"></span></p>
+            </div>
+            <div class="column">
+                <p>{% trans "Wind Direction" %}: <span id="windDirection"></span></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="container">
+    <div class="has-text-centered">
+        <div class="field has-addons">
+            <div class="control">
+                <input id="city_name_input" class="input" type="text"
+                       placeholder="{% trans "Find City Weather" %}">
+            </div>
+            <div class="control">
+                <button id="get_weather_button" class="button is-info">{% trans "Search" %}</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        {# inputs #}
+        let city_name_input = document.getElementById('city_name_input');
+        let get_weather_button = document.getElementById('get_weather_button');
+
+        {# display items #}
+        let cityName = document.getElementById('cityName')
+        let todayElement = document.getElementById('today')
+        let description = document.getElementById('description')
+        let humidity = document.getElementById('humidity')
+        let pressure = document.getElementById('pressure')
+        let temp = document.getElementById('temp')
+        let tempMax = document.getElementById('tempMax')
+        let tempMin = document.getElementById('tempMin')
+        let windDirection = document.getElementById('windDirection')
+        let windSpeed = document.getElementById('windSpeed')
+
+        {# functions #}
+        function setCityName(city) {
+            window.localStorage.setItem('city', city);
+        }
+
+        function get_city_name() {
+            return city_name_input.value;
+        }
+
+        (document.querySelectorAll('.notification .delete') || []).forEach(($delete) => {
+            const $notification = $delete.parentNode;
+
+            $delete.addEventListener('click', () => {
+                $notification.parentNode.removeChild($notification);
+            });
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // Get all "navbar-burger" elements
+            const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+            // Check if there are any navbar burgers
+            if ($navbarBurgers.length > 0) {
+
+                // Add a click event on each of them
+                $navbarBurgers.forEach(el => {
+                    el.addEventListener('click', () => {
+
+                        // Get the target from the "data-target" attribute
+                        const target = el.dataset.target;
+                        const $target = document.getElementById(target);
+
+                        // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+                        el.classList.toggle('is-active');
+                        $target.classList.toggle('is-active');
+
+                    });
+                });
+            }
+
+        });
+
+        function updateUI(data) {
+            cityName.innerText = data.city
+            description.innerText = data.description
+            humidity.innerText = data.humidity
+            pressure.innerText = data.pressure
+            temp.innerText = data.temp
+            tempMax.innerText = data.temp_max
+            tempMin.innerText = data.temp_min
+            windDirection.innerText = data.wind_direction
+            windSpeed.innerText = data.wind_speed
+        }
+
+        function get_weather(city_name) {
+            fetch(`/api/v1/weather/city/${city_name}?LANG={{LANGUAGE_CODE}}`).then(response => {
+                if (response.status === 200) {
+                    return response.json();
+                } else if (response.status === 404 || response.status === 429 || response.status === 401) {
+                    response.text().then(function (message){
+                        alert(message);
+                    })
+                } else {
+                    alert("Unhandled Server Error")
+                }
+            }).then(data => {
+                if (data.city) {
+                    setCityName(data.city);
+                    updateUI(data);
+                }
+            });
+        }
+
+        city_name_input.addEventListener('keyup', function (e){
+            if(e.key === 'Enter'){
+                e.preventDefault();
+                get_weather_button.click();
+            }
+        });
+
+        get_weather_button.addEventListener('click', function () {
+            city = get_city_name();
+            if (city.length > 2) {
+                get_weather(city);
+                city_name_input.value = "";
+            }
+        });
+
+
+        let city_name = window.localStorage.getItem('city');
+        if (city_name == null) {
+            city_name = 'cologne';
+        }
+        setCityName(city_name);
+        get_weather(city_name);
+        todayElement.innerText = new Date();
+    }, false);
+</script>
+</body>
+
+</html>
