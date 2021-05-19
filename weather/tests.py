@@ -1,3 +1,4 @@
+import time
 import asyncio
 import aiohttp
 
@@ -27,6 +28,7 @@ class FunctionalTestCases(TestCase):
 
     def tearDown(self) -> None:
         self.browser.quit()
+
 
 class IntegrationTestCases(TestCase):
 
