@@ -1,0 +1,151 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-05-19 19:27+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: weather/api/rest/views.py:28
+msgid "City not found"
+msgstr "Ciudad no encontrada"
+
+#: weather/api/rest/views.py:30
+msgid "Unauthorized"
+msgstr "No autorizado"
+
+#: weather/api/rest/views.py:32
+msgid "API Rate Limit"
+msgstr "Límite de tasa de API"
+
+#: weather/templates/weather/home.html:12
+msgid "Weather"
+msgstr "Tiempo"
+
+#: weather/templates/weather/home.html:37
+msgid "Weather App"
+msgstr "Aplicación del tiempo"
+
+#: weather/templates/weather/home.html:44 weather_service/settings.py:129
+msgid "English"
+msgstr "Inglés"
+
+#: weather/templates/weather/home.html:45 weather_service/settings.py:130
+msgid "Deutsch"
+msgstr "Alemana"
+
+#: weather/templates/weather/home.html:46 weather_service/settings.py:131
+msgid "Spanish"
+msgstr "Española"
+
+#: weather/templates/weather/home.html:61
+msgid "Temp"
+msgstr "Temp"
+
+#: weather/templates/weather/home.html:64
+msgid "Min"
+msgstr "Min"
+
+#: weather/templates/weather/home.html:65
+msgid "Max"
+msgstr "Max"
+
+#: weather/templates/weather/home.html:70
+msgid "Humidity"
+msgstr "Humedad"
+
+#: weather/templates/weather/home.html:73
+msgid "Pressure"
+msgstr "Presión"
+
+#: weather/templates/weather/home.html:78
+msgid "Wind Speed"
+msgstr "Velocidad del viento"
+
+#: weather/templates/weather/home.html:81
+msgid "Wind Direction"
+msgstr "Dirección del viento"
+
+#: weather/templates/weather/home.html:92
+msgid "Find City Weather"
+msgstr "Encontrar el clima de la ciudad"
+
+#: weather/templates/weather/home.html:95
+msgid "Search"
+msgstr "Buscar"
+
+#: weather/utils.py:10
+msgid "North"
+msgstr "Norte"
+
+#: weather/utils.py:12
+msgid "North-Northeast"
+msgstr "Norte-Noreste"
+
+#: weather/utils.py:14
+msgid "Northeast"
+msgstr "Noreste"
+
+#: weather/utils.py:16
+msgid "East-Northeast"
+msgstr "Este-Noreste"
+
+#: weather/utils.py:18
+msgid "East"
+msgstr "Este"
+
+#: weather/utils.py:20
+msgid "East-Southeast"
+msgstr "Este-Sureste"
+
+#: weather/utils.py:22
+msgid "Southeast"
+msgstr "Sureste"
+
+#: weather/utils.py:24
+msgid "South-Southeast"
+msgstr "Sur-Sureste"
+
+#: weather/utils.py:26
+msgid "South"
+msgstr "Sur"
+
+#: weather/utils.py:28
+msgid "South-Southwest"
+msgstr "Suroeste"
+
+#: weather/utils.py:30
+msgid "Southwest"
+msgstr "Sur oeste"
+
+#: weather/utils.py:32
+msgid "West-Southwest"
+msgstr "Oeste-Suroeste"
+
+#: weather/utils.py:34
+msgid "West"
+msgstr "Oeste"
+
+#: weather/utils.py:36
+msgid "West-Northwest"
+msgstr "Oeste-Noroeste"
+
+#: weather/utils.py:38
+msgid "Northwest"
+msgstr "Noroeste"
+
+#: weather/utils.py:40
+msgid "North-Northwest"
+msgstr "Noroeste"
