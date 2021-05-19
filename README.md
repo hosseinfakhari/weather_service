@@ -8,13 +8,13 @@ Show the current weather for any city.
 To build and run this project using docker and docker-compose simply run:
 
 ```bash
-  echo "DEBUG=False
-  SECRET_KEY='oneOfTheMostSecureSecretsInTheWorld'
-  OPEN_WEATHER_MAP_API_KEY='your api key from OWM'
-  MEMCACHED_URL=memcached:11211
-  CACHE_TTL=60" >> .env
+echo "DEBUG=False
+SECRET_KEY='oneOfTheMostSecureSecretsInTheWorld'
+OPEN_WEATHER_MAP_API_KEY='your api key from OWM'
+MEMCACHED_URL=memcached:11211
+CACHE_TTL=60" >> .env
 
-  docker-compose up -d
+docker-compose up -d
 ```
 * replace `OPEN_WEATHER_MAP_API_KEY` And `SECRET_KEY` with your own string in `.env` file
 
