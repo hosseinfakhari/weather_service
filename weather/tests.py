@@ -2,10 +2,31 @@ import asyncio
 import aiohttp
 
 from django.test import TestCase
+from selenium import webdriver
 
 from weather.services import fetch_city_weather
 from weather.utils import wind_degree_to_direction
 
+
+class FunctionalTestCases(TestCase):
+
+    def setUp(self) -> None:
+        self.browser = webdriver.Firefox()
+
+    def test_there_is_homepage(self):
+        self.browser.get('http://localhost:8000/')
+        self.assertIn('Weather App', self.browser.page_source)
+
+    def test_temp_of_fereydunkenar(self):
+        self.browser.get('http://localhost:8000/')
+        city_name_input = self.browser.find_element_by_id('city_name_input')
+        city_name_input.send_keys('fereydunkenar')
+        self.browser.find_element_by_id('get_weather_button').click()
+        time.sleep(5)
+        self.assertIn('Fereydūnkenār', self.browser.page_source)
+
+    def tearDown(self) -> None:
+        self.browser.quit()
 
 class IntegrationTestCases(TestCase):
 
