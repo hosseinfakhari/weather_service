@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  weather:
+    build: .
+    ports:
+      - '8000:8000'
+    networks:
+      - weathernet
+    depends_on:
+      - memcached
+    environment:
+      - MEMCACHED_URL=${MEMCACHED_URL}
+      - CACHE_TTL=${CACHE_TTL}
+      - SECRET_KEY=${SECRET_KEY}
+      - OPEN_WEATHER_MAP_API_KEY=${OPEN_WEATHER_MAP_API_KEY}
+      - DEBUG=${DEBUG}
+
+  memcached:
+    image: memcached
+    networks:
+      - weathernet
+
+
+networks:
+  weathernet:
