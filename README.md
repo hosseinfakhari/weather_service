@@ -18,7 +18,7 @@ docker-compose up -d
 ```
 * replace `OPEN_WEATHER_MAP_API_KEY` And `SECRET_KEY` with your own string in `.env` file
 
-then open your browser and navigate to `http://localhost:8000`## API Reference
+then open your browser and navigate to `http://localhost:8000`
 
 ## API Reference
 
